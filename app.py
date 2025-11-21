@@ -12,7 +12,7 @@ urls_input = st.text_area("LinkedIn URLs", height=200)
 
 n8n_webhook_url = "https://oversolemnly-vanitied-milagro.ngrok-free.dev/webhook/d71f69a1-6e6a-40d8-b510-4be5c02323f6"
 
-if st.button("Run Lead Generation"):
+if st.button("Run Lead Scoring"):
     if not urls_input.strip():
         st.error("Please enter at least one link.")
     else:
@@ -32,11 +32,10 @@ if st.button("Run Lead Generation"):
 
                     df = pd.DataFrame(data)
 
-                    st.success("Lead generation completed!")
+                    st.success("Lead scoring completed!")
 
                     st.dataframe(df)
 
-                    # Download CSV
                     csv = df.to_csv(index=False)
                     st.download_button(
                         "Download CSV",
