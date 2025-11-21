@@ -11,10 +11,7 @@ st.write("Paste LinkedIn profile URLs below (one per line):")
 
 urls_input = st.text_area("LinkedIn URLs", height=200)
 
-n8n_webhook_url = "https://oversolemnly-vanitied-milagro.ngrok-free.dev/webhook/d71f69a1-6e6a-40d8-b510-4be5c02323f6"
-
-SECRET_KEY = st.secrets["WEBHOOK_SECRET"]
-
+n8n_webhook_url = "WEBHOOK_SECRET"
 
 if st.button("Run Lead Scoring"):
     if not urls_input.strip():
@@ -26,7 +23,7 @@ if st.button("Run Lead Scoring"):
             try:
                 response = requests.post(
                         n8n_webhook_url,
-                        json={"urls": urls, "token": SECRET_KEY}
+                        json={"urls": urls}
                 )
 
                 data = response.json()
