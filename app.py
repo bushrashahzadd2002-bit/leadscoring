@@ -12,8 +12,7 @@ st.write("Paste LinkedIn profile URLs below (one per line):")
 
 urls_input = st.text_area("LinkedIn URLs", height=200)
 n8n_webhook_url = st.secrets["WEBHOOK_URL"]
-#N8N_USER = st.secrets["N8N_USER"]
-#N8N_PASSWORD = st.secrets["N8N_PASSWORD"]
+
 if st.button("Run Lead Scoring"):
     if not urls_input.strip():
         st.error("Please enter at least one link.")
@@ -22,11 +21,11 @@ if st.button("Run Lead Scoring"):
 
         with st.spinner("Processing leads..."):
             try:
-               response = requests.post(
-                        n8n_webhook_url,
-                        json={"urls": urls},
-                        auth=(st.secrets["N8N_USER"], st.secrets["N8N_PASSWORD"])
-                    )
+                response = requests.post(
+                    n8n_webhook_url,
+                    json={"urls": urls},
+                    auth=(st.secrets["N8N_USER"], st.secrets["N8N_PASSWORD"])
+                )
 
                 data = response.json()
 
@@ -34,7 +33,6 @@ if st.button("Run Lead Scoring"):
                     data = [data]
 
                 st.success("Lead Scoring completed!")
-
                 st.success("✅ Data added to Google Sheet!")
 
             except Exception as e:
