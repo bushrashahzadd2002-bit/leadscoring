@@ -12,7 +12,8 @@ st.write("Paste LinkedIn profile URLs below (one per line):")
 urls_input = st.text_area("LinkedIn URLs", height=200)
 
 n8n_webhook_url = "WEBHOOK_SECRET"
-
+N8N_USER = "N8N_USER"
+N8N_PASSWORD = "N8N_PASSWORD"
 if st.button("Run Lead Scoring"):
     if not urls_input.strip():
         st.error("Please enter at least one link.")
@@ -23,7 +24,8 @@ if st.button("Run Lead Scoring"):
             try:
                 response = requests.post(
                         n8n_webhook_url,
-                        json={"urls": urls}
+                        json={"urls": urls,
+                               auth=(N8N_USER, N8N_PASSWORD)}
                 )
 
                 data = response.json()
