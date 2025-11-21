@@ -11,7 +11,7 @@ st.write("Paste LinkedIn profile URLs below (one per line):")
 
 urls_input = st.text_area("LinkedIn URLs", height=200)
 
-n8n_webhook_url= st.secrets["WEBHOOK_URL"]
+n8n_webhook_url= "WEBHOOK_URL"
 N8N_USER = st.secrets["N8N_USER"]
 N8N_PASSWORD = st.secrets["N8N_PASSWORD"]
 
