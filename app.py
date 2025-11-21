@@ -10,10 +10,9 @@ st.title("Lead Scoring")
 st.write("Paste LinkedIn profile URLs below (one per line):")
 
 urls_input = st.text_area("LinkedIn URLs", height=200)
-
-n8n_webhook_url= "WEBHOOK_URL"
-N8N_USER = st.secrets["N8N_USER"]
-N8N_PASSWORD = st.secrets["N8N_PASSWORD"]
+n8n_webhook_url= = os.environ.get("WEBHOOK_URL")
+N8N_USER = os.environ.get("N8N_USER")
+N8N_PASSWORD = os.environ.get("N8N_PASSWORD")
 
 if st.button("Run Lead Scoring"):
     if not urls_input.strip():
