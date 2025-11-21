@@ -10,7 +10,7 @@ st.title("Lead Scoring")
 st.write("Paste LinkedIn profile URLs below (one per line):")
 
 urls_input = st.text_area("LinkedIn URLs", height=200)
-n8n_webhook_url= = os.environ.get("WEBHOOK_URL")
+n8n_webhook_url = os.environ.get("WEBHOOK_URL")
 N8N_USER = os.environ.get("N8N_USER")
 N8N_PASSWORD = os.environ.get("N8N_PASSWORD")
 
