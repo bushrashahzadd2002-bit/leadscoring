@@ -26,22 +26,10 @@ if st.button("Run Lead Scoring"):
                 response = requests.post(n8n_webhook_url, json={"urls": urls})
                 data = response.json()
 
-
-                if isinstance(data, dict) and data.get("message") == "Workflow was started":
-      
-                    time.sleep(1)  # small delay
-                    # no message shown
-                    response = requests.post(n8n_webhook_url, json={"urls": urls})
-                    data = response.json()
-
-
                 if isinstance(data, dict):
                     data = [data]
 
-                df = pd.DataFrame(data)
-
                 st.success("Lead Scoring completed!")
-                st.dataframe(df)
 
                 st.success("✅ Data added to Google Sheet!")
 
