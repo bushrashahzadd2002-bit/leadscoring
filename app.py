@@ -24,7 +24,8 @@ if st.button("Run Lead Scoring"):
             try:
                 response = requests.post(
                         n8n_webhook_url,
-                        json={"urls": urls}
+                        json={"urls": urls
+                             auth: (N8N_USER,N8N_PASSWORD)}
                 )
 
                 data = response.json()
