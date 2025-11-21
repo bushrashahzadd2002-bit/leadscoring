@@ -1,6 +1,7 @@
 import streamlit as st
 import requests
 import pandas as pd
+import time
 
 st.set_page_config(page_title="Lead Scoring", layout="wide")
 
@@ -12,6 +13,7 @@ urls_input = st.text_area("LinkedIn URLs", height=200)
 
 n8n_webhook_url = "https://oversolemnly-vanitied-milagro.ngrok-free.dev/webhook/d71f69a1-6e6a-40d8-b510-4be5c02323f6"
 
+
 if st.button("Run Lead Scoring"):
     if not urls_input.strip():
         st.error("Please enter at least one link.")
@@ -20,23 +22,21 @@ if st.button("Run Lead Scoring"):
 
         with st.spinner("Processing leads..."):
             try:
+                # first request
                 response = requests.post(n8n_webhook_url, json={"urls": urls})
-                
-                if response.status_code != 200:
-                    st.error(f"n8n Error: {response.text}")
-                    st.stop()
+                data = response.json()
 
-                raw_data = response.json()
 
-                if isinstance(raw_data, dict) and raw_data.get("message") == "Workflow has started":
-                    st.error("n8n did not return lead data. Check your workflow.")
-                    st.stop()
+                if isinstance(data, dict) and data.get("message") == "Workflow was started":
+      
+                    time.sleep(1)  # small delay
+                    # no message shown
+                    response = requests.post(n8n_webhook_url, json={"urls": urls})
+                    data = response.json()
 
-                # Ensure data is a list
-                if isinstance(raw_data, dict):
-                    data = [raw_data]
-                else:
-                    data = raw_data
+
+                if isinstance(data, dict):
+                    data = [data]
 
                 df = pd.DataFrame(data)
 
