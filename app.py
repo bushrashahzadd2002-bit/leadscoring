@@ -2,6 +2,7 @@ import streamlit as st
 import requests
 import pandas as pd
 import time
+import os
 
 st.set_page_config(page_title="Lead Scoring", layout="wide")
 
